@@ -1,21 +1,22 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
+import {ColorModeContext, useMode} from './Styles/theme'
+import {CssBaseline, ThemeProvider } from '@mui/material'
 
-import './App.css';
+import './App.css'
 import React from 'react'
-import {BrowserRouter, Routes, Route } from 'react-router-dom'
-
-//pages
-import Home from './components/pages/Home'
+import router from './router'
+import { RouterProvider } from 'react-router-dom';
 
 function App() {
+  const [theme, colorMode] = useMode()
+
   return (
-    <React.Fragment>
-      <BrowserRouter>
-        <Routes>
-          <Route path='/' element={<Home />} />
-        </Routes>
-      </BrowserRouter>
-    </React.Fragment>
+    <ColorModeContext.Provider value={colorMode}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <RouterProvider router={router} />
+      </ThemeProvider>
+    </ColorModeContext.Provider>
   );
 }
 
